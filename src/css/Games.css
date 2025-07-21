@@ -50,3 +50,8 @@ div.game {
 .map {
     height: 180px;
 }
+
+.site-name {
+    font-weight: 600;
+    font-size: larger;
+}

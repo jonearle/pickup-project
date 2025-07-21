@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <header>
-      <div className='site-name'>brand name here</div>
+      <div className='site-name'>Hoop Helper</div>
       <button className='guest-login' onClick={() => navigate('/login')}>Login</button>
     </header>
   );
