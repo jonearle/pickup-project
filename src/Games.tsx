@@ -1,4 +1,5 @@
 import './css/Games.css'
+import Map from './Map.tsx'
 import { useNavigate } from 'react-router-dom';
 import type { Game } from './types/pickupTypes.ts'
 import exuser from './data/exuser.json';
@@ -27,8 +28,8 @@ function renderGame(game: Game) {
         {/* Mapping through the list of players in the JSON file */}
         {game.players.map(player => (<li key={player.id}>{player.username}</li>))}
       </ul>
-      <div id="map"></div>
-      <h3>Location: {game.location[0]},{game.location[1]}</h3>
+      <h3>Location:</h3>
+      <Map />
       <h3>Time: {game.time}</h3>
     </div>
   </>
