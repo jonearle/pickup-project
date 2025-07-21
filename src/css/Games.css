@@ -1,0 +1,52 @@
+html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: white;
+}
+
+h1 {
+    padding-top: 1%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Logo on the left button on the right*/
+    padding-bottom: 1%;
+}
+
+.game-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+div.game {
+    background-color: #FAF9F6;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 26%;
+}
+
+.guest-login {
+    text-align: center;
+    padding: 1% 2%;
+    background-color: #F88158;
+    border-color: #F88158;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font: inherit;
+}
+
+.map {
+    height: 180px;
+}

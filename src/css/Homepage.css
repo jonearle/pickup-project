@@ -1,0 +1,73 @@
+html {
+    margin: 0;
+    padding: 20px 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: white;
+}
+
+.game {
+    background-color: #f5f5f5;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-weight: 600;
+    gap: 8px;
+}
+
+input {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.login-button {
+    text-align: center;
+    width: 100%;
+    padding: 8%;
+    background-color: #F88158;
+    border-color: #F88158;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font: inherit;
+    margin-top: 10px;
+}
+
+.form-container {
+    background-color: #FAF9F6;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    border-radius: 5%;
+    display: inline-flex;
+    justify-content: center; /* centers horizontally */
+    align-items: center;
+    padding: 6vh 10vw
+}

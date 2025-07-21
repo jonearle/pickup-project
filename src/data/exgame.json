@@ -1,0 +1,39 @@
+{
+    "id": 987654,
+    "host": {
+        "id": 69420,
+        "username": "joemama21",
+        "ranking": 78,
+        "email": "joemama21@gmail.com"
+    },
+    "players": [
+        {
+            "id": 11111,
+            "username": "joemama22",
+            "ranking": 78
+        },
+        {
+            "id": 22222,
+            "username": "joemama23",
+            "ranking": 78
+        },
+        {
+            "id": 33333,
+            "username": "joemama24",
+            "ranking": 78
+        },
+        {
+            "id": 44444,
+            "username": "joemama25",
+            "ranking": 78
+        },
+        {
+            "id": 55555,
+            "username": "joemama26",
+            "ranking": 78
+        }
+    ],
+    "location": [44.632412619021245, -63.5776050295352],
+    "format": 3,
+    "time": "2025-06-07T18:45:00Z"
+}
