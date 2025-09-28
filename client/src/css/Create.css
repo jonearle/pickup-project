@@ -17,25 +17,44 @@ header {
     padding-bottom: 1%;
 }
 
-.game-list {
+.game-create-page {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
 }
 
-div.game {
+.game-form-container {
     background-color: #FAF9F6;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 5%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    margin-top: -30vh;
+    height: 30rem;
+    width: 30rem;
 }
 
-.guest-login {
+.game-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+    font-size: large;
+}
+
+.game-form input,
+.game-form select {
+    height: 3rem;
+    margin-bottom: 1.5rem;    /* space below each field */
+}
+
+.confirm-create {
     text-align: center;
-    padding: 1% 2%;
+    width: 100%;
+    padding: 6%;
     background-color: #F88158;
     border-color: #F88158;
     border: none;
@@ -43,13 +62,6 @@ div.game {
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     cursor: pointer;
     font: inherit;
+    margin-top: 10px;
 }
 
-.map {
-    height: 180px;
-}
-
-.site-name {
-    font-weight: 600;
-    font-size: larger;
-}

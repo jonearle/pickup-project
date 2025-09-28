@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Homepage from './Homepage.tsx';
 import Games from './Games.tsx';
 import Login from './Login.tsx'
+import Create from './Create.tsx'
 import './css/App.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/games/create" element={<Create />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>

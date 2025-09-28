@@ -1,18 +1,19 @@
-export interface Player {
-    "id": number;
-    "username": string;
-    "ranking": number;
-}
-
-export interface Host extends Player {
-    email: string;
+export interface User {
+    id: number;
+    username: string;
+    password: string;
+    ranking: number;
 }
 
 export interface Game {
     id: number;
-    host: Host;
-    players: Player[];
-    location: [number, number];
+    host: User;
+    players: User[];
+    address: { x: number; y: number }
     format: number;
     time: string;
+    status: number;
+    // 0 = Waiting for players
+    // 1 = full
+    // 2 = complete
 }

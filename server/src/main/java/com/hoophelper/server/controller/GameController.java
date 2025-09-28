@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoophelper.server.model.Game;
+import com.hoophelper.server.model.User;
 
 @RestController
 public class GameController {
@@ -71,6 +72,8 @@ public class GameController {
 
         // Add to DB
         tempDB.put(game.getId(), game);
+
+        // Set host?
 
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
     }

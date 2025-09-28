@@ -1,15 +1,23 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 
+// Type must be defined in advance or else the type of coords is undefined and will crash on loading
+type MapProps = { coords: { x: number; y: number } };
+
 // To render the map on the game page
-export default function renderMap() {
+export default function renderMap(props: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!mapRef.current) return;
 
+    // clear leftover leaflet id
+    if ((mapRef.current as any)._leaflet_id) {
+      (mapRef.current as any)._leaflet_id = null;
+    }
+
     // Initalize map
-    const map = L.map(mapRef.current).setView([44.65, -63.59], 12);
+    const map = L.map(mapRef.current).setView([props.coords.y, props.coords.x], 12);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -17,12 +25,12 @@ export default function renderMap() {
     }).addTo(map);
 
     // Add marker
-    const marker = L.marker([44.65, -63.59]). addTo(map);
+    const marker = L.marker([props.coords.y, props.coords.x]). addTo(map);
 
     return () => {map.remove()};
-  }, []);
+  }, [[props.coords.y, props.coords.x]]);
 
   return (
-    <div ref={mapRef} style={{height: '200px', width: '350px'}}></div>
+    <div ref={mapRef} style={{ height: '200px', width: '350px' }}/>
   );
 }

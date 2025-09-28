@@ -11,7 +11,7 @@ public class Game {
     private Integer id;
     private User host;
     private List<Integer> players = new ArrayList<>();
-    private Point location;
+    private Point address;
     private Integer format;
     private String time; // Should this be string?
     private Integer status; 
@@ -32,8 +32,8 @@ public class Game {
         return players;
     }
 
-    public Point getLocation() {
-        return location;
+    public Point getAddress() {
+        return address;
     }
 
     public Integer getFormat() {
@@ -61,8 +61,8 @@ public class Game {
         this.players = players;
     }
 
-    public void setLocation(Point location) {
-        this.location = location;
+    public void setAddress(Point address) {
+        this.address = address;
     }
 
     public void setFormat(Integer format) {
