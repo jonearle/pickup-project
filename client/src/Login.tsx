@@ -16,6 +16,8 @@ export default function Homepage() {
             <label htmlFor="username">Password</label>
             <input type="text" className="password"/>
             <button className="login-button" onClick={() => navigate('/games')}>Log In!</button>
+            <span className="or-button">or</span>
+            <button className="make-account" onClick={() => navigate('/signup')}>Sign Up!</button>
           </form>
         </div>
       </div>

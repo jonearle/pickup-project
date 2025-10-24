@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoophelper.server.model.Game;
-import com.hoophelper.server.model.User;
 
 @RestController
 public class GameController {
@@ -35,8 +34,9 @@ public class GameController {
         if (gamesOnPage <= 0)
             gamesOnPage = 16;
         
-        // Make sure games are sorted
         List<Game> allGames = new ArrayList<>(tempDB.values()); // snapshot
+
+        // Sort all games by time
         allGames.sort(Comparator.comparing( // Ordered by time, null values at the end
             (Game g) -> g.getTime(), 
             Comparator.nullsLast(Comparator.naturalOrder())

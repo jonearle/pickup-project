@@ -25,7 +25,7 @@ export default function renderMap(props: MapProps) {
     }).addTo(map);
 
     // Add marker
-    const marker = L.marker([props.coords.y, props.coords.x]). addTo(map);
+    const marker = L.marker([props.coords.y, props.coords.x]).addTo(map);
 
     return () => {map.remove()};
   }, [[props.coords.y, props.coords.x]]);

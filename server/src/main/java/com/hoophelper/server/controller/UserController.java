@@ -29,7 +29,7 @@ public class UserController {
     }
 
     // POST: Register user
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<User> setUser(@RequestBody User user) {
         // Check for duplicate users 
         for (User u : tempDB) {

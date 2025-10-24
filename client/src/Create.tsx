@@ -14,7 +14,6 @@ function Header() {
     );
 }
 
-// Needs location, time, format.
 export default function Create() {
     const navigate = useNavigate()
 

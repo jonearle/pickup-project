@@ -49,6 +49,30 @@ async function getUser(id: number) {
 }
 
 // POST Register User
+export async function registerUser(email: string, username: string, password: string) {
+    // Define url/headers
+    const url = `http://localhost:8080/signup`;
+    const headers: Headers = new Headers();
+    headers.set("Content-Type", "application/json");
+    headers.set("Accept", "application/json");
+
+    // Make request object for fetch() to accept
+    const request: RequestInfo = new Request(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({email, username, password})
+    });
+
+    // Fetch data
+    const response = await fetch(request);
+
+    // Error check
+    if (!response.ok) {
+        throw new Error(`HTTP ERROR ${response.status}`);
+    }
+
+    return response.json();
+}
 
 // GET Load Games
 export async function getGames(pageNumber: number = 0, gamesOnPage: number = 16) {
@@ -71,12 +95,7 @@ export async function getGames(pageNumber: number = 0, gamesOnPage: number = 16)
 // GET one game
 
 // POST create game
-export async function createGame(
-    format: string,
-    address: string, 
-    time: string) 
-    {
-
+export async function createGame(format: string, address: string, time: string) {
     // Geocode address into coordinates
     console.log("Geocoding address: ", address);
     const coords = await geocodeAddress(address);
@@ -110,6 +129,9 @@ export async function createGame(
 }
 
 // POST sign up for a game
+export function joinGame(game: Game) {
+    
+}
 
 // DELETE delete a game
 

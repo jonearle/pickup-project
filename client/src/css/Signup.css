@@ -48,7 +48,7 @@ input {
     gap: 2rem;
 }
 
-.login-button {
+.signup-button {
     text-align: center;
     width: 100%;
     padding: 8%;
@@ -70,22 +70,4 @@ input {
     justify-content: center; /* centers horizontally */
     align-items: center;
     padding: 6vh 10vw
-}
-
-.make-account {
-    text-align: center;
-    width: 100%;
-    padding: 2%;
-    background-color: inherit;
-    border-color: #F88158;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font: inherit;
-    margin-top: 10px;
-}
-
-.or-button {
-    font-size: small;
-    padding-top: 0.7rem;
 }

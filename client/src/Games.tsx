@@ -16,11 +16,19 @@ function Header() {
   );
 }
 
+function Footer() {
+  const navigate = useNavigate();
+
+  return (
+    <button className="create-game-button" onClick={() => navigate('/games/create')}>Create a Game</button>
+  )
+}
+
 // For the game page
 // ** null host is temporary, missing map **
 function renderGame(game: Game) {
-  // temp
-  console.log('Game location:', game.address);
+  const navigate = useNavigate();
+
   return(
   <>
     <div className="game">
@@ -34,6 +42,7 @@ function renderGame(game: Game) {
       <h3>Location:</h3>
       <Map key={game.id} coords={game.address}/>
       <h3>Time: {game.time}</h3>
+      <button className="join-game">Join Game</button>
     </div>
   </>
   )
@@ -61,7 +70,8 @@ export default function App() {
             {renderGame(game)}
           </div>
         ))}
-      </div>
+        </div>
+        <Footer />
     </>
     )
 }

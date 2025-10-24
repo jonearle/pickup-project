@@ -33,6 +33,19 @@ div.game {
     flex-direction: column;
 }
 
+.join-game {
+    background-color: #F88158;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    font-size: 1rem;
+    font: inherit;
+    cursor: pointer;
+    z-index: 1000;
+}
+
 .guest-login {
     text-align: center;
     padding: 1% 2%;
@@ -52,4 +65,21 @@ div.game {
 .site-name {
     font-weight: 600;
     font-size: larger;
+}
+
+.create-game-button {
+    position: fixed;
+    bottom: 2rem;           /* distance from bottom of viewport */
+    left: 50%;            /* distance from right of viewport */
+    transform: translateX(-50%); /* to keep the button in the middle with text*/
+    background-color: #F88158;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    font-size: 1rem;
+    font: inherit;
+    cursor: pointer;
+    z-index: 1000;
 }
