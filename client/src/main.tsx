@@ -6,7 +6,7 @@ import Games from './Games.tsx';
 import Login from './Login.tsx'
 import Create from './Create.tsx'
 import './css/App.css';
-import Signup from "./signup.tsx";
+import Signup from "./Signup.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

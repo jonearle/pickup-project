@@ -1,8 +1,10 @@
 package com.hoophelper.server.controller;
 import com.hoophelper.server.model.User;
+import com.hoophelper.server.model.LoginRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,23 @@ public class UserController {
     // GET: Get user
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id) {
-        // Returns user of index id
         if (id < 0 || id >= tempDB.size())
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(tempDB.get(id));
+    }
+
+    // POST: Login user
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest request) { // Map for json output
+        String username = request.getUsername();
+        String password = request.getPassword();
+
+        for (User u : tempDB) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                return ResponseEntity.ok(Map.of("status", "success"));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "unauthorized"));
     }
 
     // POST: Register user

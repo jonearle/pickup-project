@@ -49,10 +49,10 @@ function renderGame(game: Game) {
 }
 
 export default function App() {
-    // games is the state value; setGames is how you update it?
+    // games is the state value; setGames is how you update it
     const [games, setGames] = useState<Game[]>([]);
 
-    // To connect with the api?
+    // To connect with the api
     useEffect(() => {
       getGames()
         .then(setGames)

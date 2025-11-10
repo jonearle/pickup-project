@@ -48,6 +48,26 @@ async function getUser(id: number) {
     return user;
 }
 
+// POST Login User
+export const loginUser = async (username: string, password: string) => {
+    const url = `http://localhost:8080/login`;
+    const headers: Headers = new Headers();
+    headers.set("Content-Type", "application/json");
+    headers.set("Accept", "application/json");
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST', 
+            headers: headers,
+            body: JSON.stringify({username, password})
+        })
+        const json = await response.json();
+        return json
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 // POST Register User
 export async function registerUser(email: string, username: string, password: string) {
     // Define url/headers
@@ -108,6 +128,7 @@ export async function createGame(format: string, address: string, time: string) 
 
     // Make request object for fetch() to accept
     const request: RequestInfo = new Request(url, {
+        mode: "no-cors",
         method: 'POST',
         headers: headers,
         body: JSON.stringify({

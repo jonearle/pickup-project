@@ -24,7 +24,7 @@ export default function Create() {
 
     // handleSubmit function for POST request
     async function handleSubmit(event: React.FormEvent) {
-        event.preventDefault(); // stops browsers default page reload (common practice?)
+        event.preventDefault(); // stops browsers default page reload
         
         try {
             const newGame = await createGame(format, courtAddress, dateTime);
@@ -33,7 +33,7 @@ export default function Create() {
             // Navigate to games page
             navigate('/games');
         } catch(error) {
-            console.error('Error creating game:', error); // Recommended for safety?
+            console.error('Error creating game:', error);
         }
     }
 

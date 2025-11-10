@@ -1,7 +1,6 @@
 package com.hoophelper.server.model;
 
 public class User {
-    // Data fields
     private int id;
     private String username;
     private String password;
@@ -10,7 +9,6 @@ public class User {
     // Constructor
     public User() {}
 
-    // Getters and setters
     public int getId() {
         return id;
     }
