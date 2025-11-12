@@ -55,17 +55,19 @@ export const loginUser = async (username: string, password: string) => {
     headers.set("Content-Type", "application/json");
     headers.set("Accept", "application/json");
 
-    try {
-        const response = await fetch(url, {
-            method: 'POST', 
-            headers: headers,
-            body: JSON.stringify({username, password})
-        })
-        const json = await response.json();
-        return json
-    } catch (error) {
-        console.error(error);
+    const response = await fetch(url, {
+        method: 'POST', 
+        headers: headers,
+        body: JSON.stringify({username, password}),
+        credentials: 'include',
+    })
+
+    if (!response.ok) {
+        throw new Error(`HTTP ERROR ${response.status}`);
     }
+
+    const json = await response.json();
+    return json
 };
 
 // POST Register User
@@ -128,7 +130,6 @@ export async function createGame(format: string, address: string, time: string) 
 
     // Make request object for fetch() to accept
     const request: RequestInfo = new Request(url, {
-        mode: "no-cors",
         method: 'POST',
         headers: headers,
         body: JSON.stringify({

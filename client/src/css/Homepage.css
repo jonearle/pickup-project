@@ -66,9 +66,9 @@ input {
     background-color: #FAF9F6;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     border-radius: 5%;
-    display: inline-flex;
-    justify-content: center; /* centers horizontally */
-    align-items: center;
+    display: flex;
+    flex-direction: column; /* centers horizontally */
+    align-items: col;
     padding: 6vh 10vw
 }
 

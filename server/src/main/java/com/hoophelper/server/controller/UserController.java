@@ -1,5 +1,6 @@
 package com.hoophelper.server.controller;
 import com.hoophelper.server.model.User;
+import com.hoophelper.server.repository.UserRepository;
 import com.hoophelper.server.model.LoginRequest;
 
 import java.util.ArrayList;
@@ -7,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +25,19 @@ public class UserController {
     private List<User> tempDB = new ArrayList<>();
     private AtomicInteger idCounter = new AtomicInteger(1);
 
+    @Autowired
+    private UserRepository userRepository;
+
     // GET: Get user
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id) {
-        if (id < 0 || id >= tempDB.size())
+        if (!userRepository.existsById(id))
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(tempDB.get(id));
+        return ResponseEntity.ok(userRepository.findById(id).get());
     }
 
     // POST: Login user
+    // * Configure with spring security later *
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest request) { // Map for json output
         String username = request.getUsername();
@@ -45,12 +53,11 @@ public class UserController {
 
     // POST: Register user
     @PostMapping("/signup")
-    public ResponseEntity<User> setUser(@RequestBody User user) {
-        // Check for duplicate users 
-        for (User u : tempDB) {
-            if (u.getUsername().equals(user.getUsername())) 
-                return ResponseEntity.status(HttpStatus.CONFLICT).build(); // Build returns just the code
-        }
+    public ResponseEntity<User> setUser(@RequestBody LoginRequest request) {
+        String username = request.getUsername();
+        String password = request.getPassword();
+
+        @Query(value = )
 
         // Set ID
         user.setId(idCounter.getAndIncrement());

@@ -27,8 +27,6 @@ function Footer() {
 // For the game page
 // ** null host is temporary, missing map **
 function renderGame(game: Game) {
-  const navigate = useNavigate();
-
   return(
   <>
     <div className="game">
