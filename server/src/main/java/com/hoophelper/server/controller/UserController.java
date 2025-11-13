@@ -52,19 +52,13 @@ public class UserController {
     }
 
     // POST: Register user
+    // * Configure with spring security later *
+    /* 
     @PostMapping("/signup")
     public ResponseEntity<User> setUser(@RequestBody LoginRequest request) {
         String username = request.getUsername();
         String password = request.getPassword();
+    } 
+    */
 
-        @Query(value = )
-
-        // Set ID
-        user.setId(idCounter.getAndIncrement());
-        // **Add password hashing here?**
-        tempDB.add(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
-    }
-
-    // GET: Get user's games?
 }

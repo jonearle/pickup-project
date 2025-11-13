@@ -1,12 +1,11 @@
 package com.hoophelper.server.controller;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,8 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+
 
 import com.hoophelper.server.model.Game;
+import com.hoophelper.server.repository.GameRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -27,34 +29,26 @@ public class GameController {
     private ConcurrentHashMap<Integer, Game> tempDB = new ConcurrentHashMap<>();
     private AtomicInteger idCounter = new AtomicInteger(1);
 
+    @Autowired
+    private GameRepository gameRepository;
+
     // Load games
     @GetMapping("/games")
-    public ResponseEntity<List<Game>> getPage(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "16") int gamesOnPage) {
-        // Sanitize data
-        if (pageNumber <= 0) 
-            pageNumber = 0;
-        if (gamesOnPage <= 0)
-            gamesOnPage = 16;
-        
-        List<Game> allGames = new ArrayList<>(tempDB.values()); // snapshot
+    public ResponseEntity<List<Game>> getPage(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "15") int gamesOnPage) {
+        try {
+            // Sanitize data
+            if (pageNumber <= 0) 
+                pageNumber = 0;
+            if (gamesOnPage <= 0)
+                gamesOnPage = 15;
+            
+            List<Game> page = gameRepository.findAllByOrderByGameTimeDesc(PageRequest.of(pageNumber, gamesOnPage));
 
-        // Sort all games by time
-        allGames.sort(Comparator.comparing( // Ordered by time, null values at the end
-            (Game g) -> g.getTime(), 
-            Comparator.nullsLast(Comparator.naturalOrder())
-        ));
-
-        // Get the page indices
-        int startIndex = pageNumber * gamesOnPage;
-        if (startIndex >= allGames.size()) {
-            return ResponseEntity.ok(List.of()); // page past end creates an empty list
+            return ResponseEntity.ok(page);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        int endIndex = Math.min(startIndex + gamesOnPage, allGames.size()); // Math.min() will pick the smallest of the 2 numbers making sure it never exceeds the limit
-
-        // New list with only the needed game (already sorted)
-        List<Game> someGames = allGames.subList(startIndex, endIndex);
-        
-        return ResponseEntity.ok(someGames);
     }
 
 

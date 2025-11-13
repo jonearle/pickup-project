@@ -1,46 +1,62 @@
 package com.hoophelper.server.model;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="game")
 public class Game {
 
-    // For coords
-    private record Point(float x, float y) {}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="game_id", nullable=false, unique=true)
+    private Integer game_id;
 
-    // Data
-    private Integer id;
-    private User host;
-    private List<Integer> players = new ArrayList<>();
-    private Point address;
+    @Column(name="format", nullable=false)
     private Integer format;
-    private String time; // Should this be string?
+
+    @Column(name="time", nullable=false)
+    private LocalDateTime time;
+
+    @Column(name="status", nullable=false)
     private Integer status; 
     // 0 = Waiting for players
     // 1 = full
     // 2 = complete
 
-    // Getters
-    public Integer getId() {
-        return id;
+    @Column(name="latitude", nullable=false)
+    private Double latitude;
+
+    @Column(name="longitude", nullable=false)
+    private Double longitude;
+
+    // *** 
+
+    public Game() {}
+
+    public Integer getGame_id() {
+        return game_id;
     }
 
-    public User getHost() {
-        return host;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public List<Integer> getPlayers() {
-        return players;
-    }
-
-    public Point getAddress() {
-        return address;
+    public Double getLongitude() {
+        return longitude;
     }
 
     public Integer getFormat() {
         return format;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
@@ -48,28 +64,23 @@ public class Game {
         return status;
     }
 
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGame_id(Integer game_id) {
+        this.game_id = game_id;
     }
 
-    public void setHost(User host) {
-        this.host = host;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public void setPlayers(List<Integer> players) {
-        this.players = players;
-    }
-
-    public void setAddress(Point address) {
-        this.address = address;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setFormat(Integer format) {
         this.format = format;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -77,16 +88,5 @@ public class Game {
         if (status >= 0 && status <= 2) { // Must be 0, 1, 2 (for the corresponding status above)
             this.status = status;
         }
-    }
-
-    // Helper methods for the Players ArrayList
-    // Add Player
-    public void addPlayer(Integer playerID) {
-        players.add(playerID);
-    }
-
-    // Remove Player
-    public void removePlayer(Integer playerID) {
-        players.remove(playerID);
     }
 }
