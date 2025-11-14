@@ -20,6 +20,8 @@ import org.springframework.data.domain.PageRequest;
 
 
 import com.hoophelper.server.model.Game;
+import com.hoophelper.server.model.GamePlayers;
+import com.hoophelper.server.repository.GamePlayersRepository;
 import com.hoophelper.server.repository.GameRepository;
 
 @RestController
@@ -31,6 +33,9 @@ public class GameController {
 
     @Autowired
     private GameRepository gameRepository;
+
+    @Autowired
+    private GamePlayersRepository gamePlayersRepository;
 
     // Load games
     @GetMapping("/games")
@@ -55,41 +60,29 @@ public class GameController {
     // Get one game
     @GetMapping("/games/{id}")
     public ResponseEntity<Game> getGame(@PathVariable Integer id) {
-        if (tempDB.containsKey(id) == false)
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(tempDB.get(id));
+        try {
+            return ResponseEntity.ok(gameRepository.getReferenceById(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
     
     // Create game
     @PostMapping("/games")
     public ResponseEntity<Game> newGame(@RequestBody Game game) {
-        // Set id
-        game.setId(idCounter.getAndIncrement());
-
-        // Add to DB
-        tempDB.put(game.getId(), game);
-
-        // Set host?
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(game);
+        try {
+            return ResponseEntity.ok(gameRepository.save(game));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     // Sign up for a game
     @PostMapping("/games/{id}/players")
     public ResponseEntity<Game> joinGame(@PathVariable Integer id, @RequestBody Integer playerID) {
-        // Check if id is valid
-        Game currGame;
-        if (tempDB.containsKey(id)) {
-            // Find game and player to list
-            currGame = tempDB.get(id);
-            currGame.addPlayer(playerID);
-
-            // Return game state
-            return ResponseEntity.ok(currGame);
-        }
         
-        else 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     // Delete a game
