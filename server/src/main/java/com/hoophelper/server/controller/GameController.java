@@ -17,38 +17,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 
 
 import com.hoophelper.server.model.Game;
 import com.hoophelper.server.model.GamePlayers;
-import com.hoophelper.server.repository.GamePlayersRepository;
-import com.hoophelper.server.repository.GameRepository;
+import com.hoophelper.server.service.GamePlayersService;
+import com.hoophelper.server.service.GameService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 public class GameController {
-    // In memory list (for now)
-    private ConcurrentHashMap<Integer, Game> tempDB = new ConcurrentHashMap<>();
-    private AtomicInteger idCounter = new AtomicInteger(1);
-
-    @Autowired
-    private GameRepository gameRepository;
-
-    @Autowired
-    private GamePlayersRepository gamePlayersRepository;
+    private GameService gameService;
+    private GamePlayersService gpService;
 
     // Load games
     @GetMapping("/games")
-    public ResponseEntity<List<Game>> getPage(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "15") int gamesOnPage) {
+    public ResponseEntity<Page<Game>> getPage(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "15") int gamesOnPage) {
         try {
-            // Sanitize data
-            if (pageNumber <= 0) 
-                pageNumber = 0;
-            if (gamesOnPage <= 0)
-                gamesOnPage = 15;
-            
-            List<Game> page = gameRepository.findAllByOrderByGameTimeDesc(PageRequest.of(pageNumber, gamesOnPage));
-
+            Page<Game> page = gameService.getPage(pageNumber, gamesOnPage);
             return ResponseEntity.ok(page);
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +48,11 @@ public class GameController {
     @GetMapping("/games/{id}")
     public ResponseEntity<Game> getGame(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(gameRepository.getReferenceById(id));
+            Game game = gameService.getGame(id);
+            if (game == null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            else 
+                return ResponseEntity.ok(game);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -82,7 +73,7 @@ public class GameController {
     // Sign up for a game
     @PostMapping("/games/{id}/players")
     public ResponseEntity<Game> joinGame(@PathVariable Integer id, @RequestBody Integer playerID) {
-        
+        gamePlayersRepository.save()
     }
 
     // Delete a game

@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-
     UserService userService;
 
     // GET: Get user
@@ -41,6 +38,7 @@ public class UserController {
 
     // POST: Login user
     // * Configure with spring security later *
+    /*
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginRequest request) { // Map for json output
         String username = request.getUsername();
@@ -52,7 +50,7 @@ public class UserController {
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "unauthorized"));
-    }
+    }*/
 
     // POST: Register user
     // * Configure with spring security later *

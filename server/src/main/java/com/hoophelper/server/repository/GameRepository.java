@@ -2,13 +2,13 @@ package com.hoophelper.server.repository;
 
 import com.hoophelper.server.model.Game;
 
-import java.util.List;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
     // Need pageable to do LIMIT and OFFSET
-    List<Game> findAllByOrderByGameTimeDesc(Pageable pageable);
+    Page<Game> findAllByOrderByGameTimeDesc(Pageable pageable);
 }
 
